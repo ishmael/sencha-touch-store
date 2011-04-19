@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
 
     # Set iPhone format if request to iphone.trawlr.com
     def adjust_format_for_iphone
-      request.format = :iphone if mobile_device?
+      if request.format == :html
+        request.format = :iphone if mobile_device?
+      end
     end  
 
     def mobile_device?

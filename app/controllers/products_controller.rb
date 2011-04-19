@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @products }
+      format.json {render :json => {:success => true, :data => @products, :total => @products.count}  }
     end
   end
 
