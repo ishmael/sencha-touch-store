@@ -1,7 +1,8 @@
 menu = [{
             text: 'Products',
             card: app.views.ProductList,
-            source: 'app/views/ProductList.js'
+            source: 'app/views/ProductList.js',
+            leaf: true
 }];
         
 Ext.regModel('Menu', {

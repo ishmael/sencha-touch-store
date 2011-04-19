@@ -10,6 +10,7 @@ app.models.Product = Ext.regModel("app.models.Product", {
 
 app.stores.products = new Ext.data.Store({
     autoLoad: true,
+    storeId: "app.stores.products",
     model: "app.models.Product",
     proxy: {
         type: 'rest',
