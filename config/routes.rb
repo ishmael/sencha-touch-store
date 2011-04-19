@@ -1,6 +1,6 @@
 SenchaTouchStore::Application.routes.draw do
   get "dashboard/index"
-
+  root :to => "dashboard#index"
   resources :products
 
   # The priority is based upon order of creation:
