@@ -1,18 +1,17 @@
-app.views.ProductList = new Ext.TabPanel ( {
-    items: [{
-        title: 'Simple',
-        layout: Ext.is.Phone ? 'fit' : {
-            type: 'vbox',
-            align: 'center',
-            pack: 'center'
-        },
-        cls: 'demo-list',
+app.views.ProductList = new Ext.Panel ( {
         items: [{
-            width: Ext.is.Phone ? undefined : 300,
-            height: 500,
+
             xtype: 'list',
             store:  app.stores.products,
-            itemTpl: '<div class="contact"><strong>{title}</strong> {description}</div>'
-        }]
-    }]
+            itemTpl: '<div class="contact"><strong>{title}</strong></div>',
+            grouped: true,
+            indexBar: true
+
+        }],
+        layout: 'fit',
+        listeners:{
+            activate : function(){
+                app.stores.products.load();
+        }
+      }
 });

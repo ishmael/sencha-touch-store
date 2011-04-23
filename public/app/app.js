@@ -140,13 +140,10 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
             title      = nestedList.renderTitleText(recordNode),
             card, preventHide, anim;
 
-            console.log('title '+title+' id '+ subIdx);
         if (record) {
             card        = record.get('card');
             anim        = record.get('cardSwitchAnimation');
             preventHide = record.get('preventHide');
-            console.log('card title '+ record.get('text'));
-            console.log('card object'+ card);
         }
 
         if (Ext.Viewport.orientation == 'portrait' && !Ext.is.Phone && !recordNode.childNodes.length && !preventHide) {
@@ -154,7 +151,6 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
         }
 
         if (card) {
-            console.log('card '+ card);
             this.setActiveItem(card, anim || 'slide');
             this.currentCard = card;
         }
@@ -201,26 +197,8 @@ app.Main = {
         this.ui = new Ext.ux.UniversalUI({
             title: Ext.is.Phone ? 'Store' : 'Sencha Touch Store',
             useTitleAsBackText: false,
-            navigationItems: app.menu,
-            listeners: {
-                navigate : this.onNavigate,
-                scope: this
-            }
+            navigationItems: app.menu
         });
-    },
-
-
-    onNavigate : function(ui, record) {
-        if (record.data && record.data.source) {
-            console.log('navigate a record');                   
-            var source = record.get('source');
-                ui.navigationBar.doComponentLayout();
-
-
-        }
-        else {
-            ui.navigationBar.doComponentLayout();
-        }
     }
 
 };

@@ -9,9 +9,12 @@ app.models.Product = Ext.regModel("app.models.Product", {
 
 
 app.stores.products = new Ext.data.Store({
-    autoLoad: true,
     storeId: "app.stores.products",
     model: "app.models.Product",
+    sorters: 'title',    
+    getGroupString : function(record) {
+        return record.get('title')[0];
+    },    
     proxy: {
         type: 'rest',
         url: '/products',

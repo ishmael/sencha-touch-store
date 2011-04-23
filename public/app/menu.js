@@ -1,13 +1,8 @@
 app.menu = [{
-            text: 'Products',
-            cls: 'Launchscreen',
-            items: 
-                [{
-                    text: 'List',
+                    text: 'Products',
                     card: app.views.ProductList,
                     source: 'app/views/ProductList.js',
                     leaf: true
-                }]
 }];
         
 Ext.regModel('Menu', {
