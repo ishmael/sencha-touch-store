@@ -1,8 +1,13 @@
-menu = [{
+app.menu = [{
             text: 'Products',
-            card: app.views.ProductList,
-            source: 'app/views/ProductList.js',
-            leaf: true
+            cls: 'Launchscreen',
+            items: 
+                [{
+                    text: 'List',
+                    card: app.views.ProductList,
+                    source: 'app/views/ProductList.js',
+                    leaf: true
+                }]
 }];
         
 Ext.regModel('Menu', {
@@ -15,11 +20,10 @@ Ext.regModel('Menu', {
     ]
 });
         
-app.stores.menuStore = new Ext.data.TreeStore({
+app.menuStore = new Ext.data.TreeStore({
     model: 'Menu',
-    root: 
-    {
-        items: menu
+    root: {
+        items: app.menu
     },
     proxy: {
         type: 'ajax',

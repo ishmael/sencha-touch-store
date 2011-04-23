@@ -1,4 +1,4 @@
-Ext.ns('app',  'Ext.ux');
+Ext.ns('app','Ext.ux');
 
 Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
     fullscreen: true,
@@ -37,7 +37,7 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
         });
 
         this.navigationPanel = new Ext.NestedList({
-            store: app.stores.menuStore,
+            store: app.menuStore,
             useToolbar: Ext.is.Phone ? false : true,
             updateTitleText: false,
             dock: 'left',
@@ -140,10 +140,13 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
             title      = nestedList.renderTitleText(recordNode),
             card, preventHide, anim;
 
+            console.log('title '+title+' id '+ subIdx);
         if (record) {
             card        = record.get('card');
             anim        = record.get('cardSwitchAnimation');
             preventHide = record.get('preventHide');
+            console.log('card title '+ record.get('text'));
+            console.log('card object'+ card);
         }
 
         if (Ext.Viewport.orientation == 'portrait' && !Ext.is.Phone && !recordNode.childNodes.length && !preventHide) {
@@ -151,6 +154,7 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
         }
 
         if (card) {
+            console.log('card '+ card);
             this.setActiveItem(card, anim || 'slide');
             this.currentCard = card;
         }
@@ -193,20 +197,11 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
 
 app.Main = {
     init : function() {
-        this.sourceButton = new Ext.Button({
-            text: 'Source',
-            ui: 'action',
-            hidden: true,
-            handler: this.onSourceButtonTap,
-            scope: this
-        });
-
 
         this.ui = new Ext.ux.UniversalUI({
             title: Ext.is.Phone ? 'Store' : 'Sencha Touch Store',
             useTitleAsBackText: false,
-            navigationItems: app.stores.menuStore,
-
+            navigationItems: app.menu,
             listeners: {
                 navigate : this.onNavigate,
                 scope: this
@@ -217,16 +212,13 @@ app.Main = {
 
     onNavigate : function(ui, record) {
         if (record.data && record.data.source) {
+            console.log('navigate a record');                   
             var source = record.get('source');
-            ui.navigationBar.doComponentLayout();
-            Ext.Ajax.request({
-                url: source,
-            
-                scope: this
-            });
+                ui.navigationBar.doComponentLayout();
+
+
         }
         else {
-            
             ui.navigationBar.doComponentLayout();
         }
     }
@@ -244,4 +236,4 @@ Ext.setup({
     }
 });
 
-Ext.ns('app.views', 'app.models','app.stores');
+Ext.ns('app.models','app.stores','app.views');
