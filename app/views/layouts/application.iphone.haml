@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title SenchaTouchStore
+    = stylesheet_link_tag 'sink','application'
+    = javascript_include_tag :defaults,'sencha-touch-debug','app/app','app/models/Product','app/views/ProductList','app/menu'
+    = csrf_meta_tag
+  %body
+    = yield
