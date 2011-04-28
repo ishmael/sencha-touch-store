@@ -19,11 +19,16 @@ app.stores.products = new Ext.data.Store({
         type: 'rest',
         url: '/products',
         format: 'json',
+        appendId: false,
         reader: {
             type: 'json',
             root: 'data',
             record: 'product',
             totalProperty: 'total'
+        },
+        writer: {
+            type: 'json',
+            root: 'product'
         }
     } 
 });

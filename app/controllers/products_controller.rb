@@ -41,15 +41,20 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.xml
   def create
-    @product = Product.new(params[:product])
+
 
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
-        format.xml  { render :xml => @product, :status => :created, :location => @product }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @product.errors, :status => :unprocessable_entity }
+      format.html {
+        @product = Product.new(params[:product])
+        if @product.save
+          format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
+        end
+      }
+      format.json do
+            @product = Product.new(params[:product][0])
+            @product.save
+            render :json =>   {:success => true, :data => @product} 
+
       end
     end
   end
