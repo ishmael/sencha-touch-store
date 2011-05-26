@@ -17,6 +17,12 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
             scope: this
         });
 
+        this.navigationOpen = new Ext.Button({
+            iconCls: 'window',
+			handler: this.onOpenButtonTap,
+            scope: this
+        });
+
         this.backButton = new Ext.Button({
             text: this.backText,
             ui: 'back',
@@ -24,16 +30,20 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
             hidden: true,
             scope: this
         });
-        var btns = [this.navigationButton];
+        var btns = [this.navigationButton,this.navigationOpen];
         if (Ext.is.Phone) {
             btns.unshift(this.backButton);
         }
 
         this.navigationBar = new Ext.Toolbar({
+			defaults: {
+				iconMask: true,
+	            ui: 'plain'},
             ui: 'dark',
             dock: 'top',
             title: this.title,
             items: btns.concat(this.buttons || [])
+
         });
 
         this.navigationPanel = new Ext.NestedList({
@@ -164,6 +174,20 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
 
     onNavButtonTap : function() {
         this.navigationPanel.showBy(this.navigationButton, 'fade');
+    },
+    onOpenButtonTap : function() {
+		if (this.navigationPanel.hidden)
+		{
+			this.navigationPanel.show();
+			this.componentLayout.childrenChanged = true;
+			this.doComponentLayout();			
+		}
+		else
+		{
+			this.navigationPanel.hide();
+			this.componentLayout.childrenChanged = true;
+			this.doComponentLayout();
+		}
     },
 
     layoutOrientation : function(orientation, w, h) {
