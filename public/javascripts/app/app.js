@@ -18,6 +18,7 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
         });
 
         this.navigationOpen = new Ext.Button({
+			hidden: Ext.is.Phone,
             iconCls: 'window',
 			handler: this.onOpenButtonTap,
             scope: this
