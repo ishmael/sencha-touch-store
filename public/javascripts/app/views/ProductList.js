@@ -8,7 +8,7 @@ app.views.ProductList = new Ext.TabPanel ( {
         items: [
                 {
                     title: 'Lista',
-                    iconCls: 'add',
+                    iconCls: 'list',
                         layout: 'fit',                    
                     items: [{
                         xtype: 'list',
